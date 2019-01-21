@@ -2,11 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.twiceyuan.envvariable">
 
-    <application android:theme="@style/env_var_AppTheme">
+    <application>
 
         <activity
             android:name=".ui.ConfigActivity"
             android:label="环境变量配置"
+            android:theme="@style/env_var_AppTheme"
             android:windowSoftInputMode="adjustPan" />
 
     </application>
