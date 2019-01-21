@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="env_var_choice_dialog_title">选择环境变量</string>
+</resources>
