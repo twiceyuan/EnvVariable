@@ -1,1 +1,0 @@
-/Users/twiceyuan/Documents/WorkSpace/AndroidLab/EnvVariable/buildSrc/build/classes/kotlin/main/Versions.class
