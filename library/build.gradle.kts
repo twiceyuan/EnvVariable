@@ -1,3 +1,5 @@
+import com.android.build.gradle.ProguardFiles.getDefaultProguardFile
+import org.gradle.internal.impldep.aQute.bnd.osgi.Constants.options
 import org.gradle.internal.impldep.com.amazonaws.PredefinedClientConfigurations.defaultConfig
 
 plugins {
@@ -36,4 +38,34 @@ dependencies {
     testImplementation("junit:junit:4.12")
     androidTestImplementation("com.android.support.test:runner:1.0.2")
     androidTestImplementation("com.android.support.test.espresso:espresso-core:3.0.2")
+}
+
+// build a jar with source files
+// 指定编码
+tasks.withType(JavaCompile::class.java) {
+    options.encoding = "UTF-8"
+}
+
+task<Jar>("sourcesJar") {
+    from(android.sourceSets["main"].java.srcDirs)
+    classifier = "sources"
+}
+
+task<Javadoc>("javadoc") {
+    isFailOnError = false
+    source = android.sourceSets["main"].java.sourceFiles
+    classpath += project.files(android.bootClasspath.joinToString(File.pathSeparator))
+    classpath += configurations.compile
+}
+
+// build a jar with javadoc
+task<Jar>("javadocJar") {
+    dependsOn("javadoc")
+    classifier = "javadoc"
+    from("javadoc.destinationDir")
+}
+
+artifacts {
+    add("archives", tasks.getByName("sourcesJar"))
+    add("archives", tasks.getByName("javadocJar"))
 }
