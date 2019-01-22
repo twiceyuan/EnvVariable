@@ -130,17 +130,12 @@ public class ChoiceItemAdapter extends BaseAdapter {
     }
 
     private void toggleEditor(EditText editText, boolean isActive) {
+        editText.setTextIsSelectable(isActive);
+        editText.setFocusable(isActive);
+        editText.setFocusableInTouchMode(isActive);
+        editText.setEnabled(isActive);
         if (isActive) {
-            editText.setTextIsSelectable(true);
-            editText.setFocusable(true);
-            editText.setFocusableInTouchMode(true);
-            editText.setEnabled(true);
-            editText.requestFocus();
-        } else {
-            editText.setTextIsSelectable(false);
-            editText.setFocusable(false);
-            editText.setFocusableInTouchMode(false);
-            editText.setEnabled(false);
+            editText.setSelection(editText.length());
         }
     }
 
