@@ -93,7 +93,10 @@ public class EnvVariable {
             }
             File cacheFile = new File(cacheDir, name);
             return (Variable) new ObjectInputStream(new FileInputStream(cacheFile)).readObject();
-        } catch (Exception e) {
+        } catch (IOException e) {
+            Log.v(TAG, "暂无持久化的变量[" + name + "]，使用默认值");
+            return null;
+        } catch (ClassNotFoundException e) {
             Log.e(TAG, e.getMessage(), e);
             return null;
         }
